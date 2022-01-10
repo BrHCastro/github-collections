@@ -27,6 +27,7 @@ export const Dashboard: React.FC = () => {
   });
   const [newRepo, setNewRepo] = React.useState("");
   const [inputError, setInputError] = React.useState("");
+  const formEl = React.useRef<HTMLFormElement | null>(null);
 
   React.useEffect(() => {
     localStorage.setItem("@GitCollection:repositories", JSON.stringify(repos));
@@ -51,6 +52,7 @@ export const Dashboard: React.FC = () => {
       const repository = response.data;
 
       setRepos([...repos, repository]);
+      formEl.current?.reset();
       setNewRepo("");
       setInputError("");
     } catch (err) {
@@ -62,7 +64,11 @@ export const Dashboard: React.FC = () => {
     <>
       <img src={Logo} alt="Logo" />
       <Title>Catálogo de Repositórios do GitHub</Title>
-      <Form onSubmit={handleAddRepo} hasError={Boolean(inputError)}>
+      <Form
+        ref={formEl}
+        onSubmit={handleAddRepo}
+        hasError={Boolean(inputError)}
+      >
         <input
           type="text"
           placeholder="UserName/Repository"
