@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { api } from "../../services/api";
 import { Title, Form, Repos, Error } from "./styles";
@@ -45,12 +46,16 @@ export const Dashboard: React.FC = () => {
       return;
     }
 
-    const response = await api.get<GithubRepository>(`repos/${newRepo}`);
-    const repository = response.data;
+    try {
+      const response = await api.get<GithubRepository>(`repos/${newRepo}`);
+      const repository = response.data;
 
-    setRepos([...repos, repository]);
-    setNewRepo("");
-    setInputError("");
+      setRepos([...repos, repository]);
+      setNewRepo("");
+      setInputError("");
+    } catch (err) {
+      setInputError(`Repositório não encontrado`);
+    }
   }
 
   return (
@@ -70,7 +75,10 @@ export const Dashboard: React.FC = () => {
 
       <Repos>
         {repos.map((repository) => (
-          <a href="/repositories" key={repository.full_name}>
+          <Link
+            to={`repositories/${repository.full_name}`}
+            key={repository.full_name}
+          >
             <img
               src={repository.owner.avatar_url}
               alt={repository.owner.login}
@@ -80,7 +88,7 @@ export const Dashboard: React.FC = () => {
               <p>{repository.description}</p>
             </div>
             <FiChevronRight size={20} />
-          </a>
+          </Link>
         ))}
       </Repos>
     </>
