@@ -4,12 +4,18 @@
 
 ## Ferramentas 📦🛠️
 
-- 
+- [React](https://reactjs.org/)
+- [React Router DOM](https://www.npmjs.com/package/react-router-dom)
+- [React Icons](https://react-icons.netlify.com/)
+- [TypeScript](https://www.npmjs.com/package/typescript)
+- [Styled Components](https://styled-components.com/)
+
+## Features 🎨💡
 
 - Usuário poderá criar uma coleção de repositórios do github.
 - Usuário poderá fazer pesquisa através username/repositorio diretamente pela API do github.
-- O a pesquisa do usuário será armazenada/salva em localstorage.
-
+- A pesquisa do usuário será armazenada/salva em localstorage.
+- Usuário poderá visualizar detalhes do repositório.
 
 ### Autor:
 
